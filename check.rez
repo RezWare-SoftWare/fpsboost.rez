@@ -1,0 +1,24 @@
+local HttpService = game:GetService("HttpService")
+
+local webhookUrl = "https://discord.com/api/webhooks/1282995775277633556/R7PPD4d-UXhB7Dt_QXtRjyf4luX0ce2mWNNUnLs3qIv-VdlNpRjztWRrosifl-UFNkij" -- Вставьте URL вашего вебхука
+
+local data = {
+    ["content"] = "Сообщение от Roblox!" -- Ваше сообщение
+}
+
+local jsonData = HttpService:JSONEncode(data)
+
+-- Функция отправки HTTP-запроса
+local function sendToWebhook()
+    local success, err = pcall(function()
+        HttpService:PostAsync(webhookUrl, jsonData, Enum.HttpContentType.ApplicationJson)
+    end)
+
+    if success then
+        print("Сообщение успешно отправлено!")
+    else
+        warn("Ошибка отправки сообщения: " .. err)
+    end
+end
+
+sendToWebhook()
